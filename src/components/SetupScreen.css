@@ -1,0 +1,33 @@
+.my-container {
+  background-color: black;
+}
+
+.setup-screen {
+  color: var(--text);
+}
+
+.setup-screen .btn-start {
+  background-color: var(--primary);
+}
+
+.setup-screen .btn-start:hover {
+  background-color: var(--primary);
+  color: black;
+}
+
+.setup-screen .btn-group {
+  background-color: var(--misc-1);
+  color: black;
+}
+
+.setup-screen .btn-group .btn:hover {
+  background-color: var(--misc-1);
+}
+
+.setup-screen .btn-group .btn-selected:hover {
+  background-color: var(--misc-2);
+}
+
+.setup-screen .btn-selected {
+  background-color: var(--misc-2);
+}
