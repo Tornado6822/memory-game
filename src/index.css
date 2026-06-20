@@ -1,0 +1,14 @@
+:root {
+  --primary: #03fd05;
+  --text: #dff6fe;
+  --bg-primary: #141a1b;
+  --bg-secondary: #2b1127;
+
+  --misc-1: #ffdffe;
+  --misc-2: #cc53c4;
+}
+
+body {
+  min-height: 95vh;
+  background: linear-gradient(var(--bg-primary), var(--bg-secondary));
+}
