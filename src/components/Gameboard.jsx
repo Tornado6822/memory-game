@@ -2,7 +2,15 @@ import { useState, useEffect } from "react";
 import Grid from "./Grid";
 import "./Gameboard.css";
 
-function Gameboard({ board, handleClick, level, showPattern, time, setTime }) {
+function Gameboard({
+  board,
+  handleClick,
+  level,
+  showPattern,
+  time,
+  setTime,
+  symbolsEnabled,
+}) {
   useEffect(() => {
     if (!showPattern) {
       return;
@@ -22,7 +30,11 @@ function Gameboard({ board, handleClick, level, showPattern, time, setTime }) {
         <h1>Time: {(time / 1000).toFixed(2)}</h1>
       </div>
 
-      <Grid board={board} handleClick={handleClick} />
+      <Grid
+        board={board}
+        handleClick={handleClick}
+        symbolsEnabled={symbolsEnabled}
+      />
     </div>
   );
 }

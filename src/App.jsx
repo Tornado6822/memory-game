@@ -6,6 +6,7 @@ import SetupScreen from "./components/SetupScreen";
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [difficulty, setDifficulty] = useState("easy");
+  const [symbolsEnabled, setSymbolsEnabled] = useState(false);
 
   const [board, setBoard] = useState(Array(9).fill(0));
   const [level, setLevel] = useState(0);
@@ -176,6 +177,7 @@ function App() {
       showPattern={showPattern}
       time={time}
       setTime={setTime}
+      symbolsEnabled={symbolsEnabled}
     />
   ) : (
     <SetupScreen
@@ -183,6 +185,7 @@ function App() {
       setDifficulty={setDifficulty}
       difficulty={difficulty}
       startRound={startRound}
+      setSymbolsEnabled={setSymbolsEnabled}
     />
   );
 }

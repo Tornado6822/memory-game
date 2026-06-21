@@ -5,6 +5,7 @@ function SetupScreen({
   setDifficulty,
   difficulty,
   startRound,
+  setSymbolsEnabled,
 }) {
   return (
     <div className="setup-screen">
@@ -43,10 +44,12 @@ function SetupScreen({
                 <>
                   <li>Blitz Timer</li>
                   <li>Limited Lives</li>
+                  <li>Score 2x</li>
                 </>
               ) : difficulty === "medium" ? (
                 <>
                   <li>Limited Lives icon</li>
+                  <li>Score 1.5x</li>
                 </>
               ) : (
                 <>
@@ -54,6 +57,16 @@ function SetupScreen({
                 </>
               )}
             </ul>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              onClick={() => setSymbolsEnabled((prev) => !prev)}
+              id="symbolsCheck"
+            />
+            <label className="form-check-label" htmlFor="symbolsCheck"></label>
+            Enable symbols
           </div>
         </div>
 

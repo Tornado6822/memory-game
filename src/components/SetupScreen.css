@@ -31,3 +31,14 @@
 .setup-screen .btn-selected {
   background-color: var(--misc-2);
 }
+
+/*Styling for symbols input checkbox*/
+.setup-screen .form-check-input:checked {
+  background-color: var(--misc-2);
+  border-color: var(--misc-1);
+}
+
+.setup-screen .form-check-input:focus {
+  box-shadow: none;
+  outline: none;
+}

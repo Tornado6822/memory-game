@@ -1,6 +1,6 @@
 import "./Grid.css";
 
-function Grid({ board, handleClick }) {
+function Grid({ board, handleClick, symbolsEnabled }) {
   const gridSize = Math.sqrt(board.length);
 
   return (
@@ -14,7 +14,9 @@ function Grid({ board, handleClick }) {
             backgroundColor: `${tile === 1 ? "var(--primary)" : tile === 0 ? "var(--misc-1)" : "var(--bg-secondary)"}`,
           }}
         >
-          {/*}{tile ? "✓" : ""}{*/}
+          <div className="symbols">
+            {symbolsEnabled ? (tile === 1 ? "✓" : tile === 2 ? "✗" : "") : ""}
+          </div>
         </button>
       ))}
     </div>
