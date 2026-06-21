@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import Gameboard from "./components/Gameboard";
 import SetupScreen from "./components/SetupScreen";
@@ -10,15 +11,21 @@ function App() {
   const [difficulty, setDifficulty] = useState("easy");
 
   const [board, setBoard] = useState(Array(25).fill(false));
-  const [level, setLevel] = useState(0);
+  const [level, setLevel] = useState(1);
 
   function generateLevel() {
     const numToSelect = level * 3 + 5;
+
+    const sideLength = Math.ceil(Math.sqrt(numToSelect));
+    const numTiles = sideLength ** 2;
+
+    setBoard(Array(numTiles).fill(false));
+
     let selected = [];
     for (let i = 0; i < numToSelect; i++) {
-      let selectedIndex = Math.floor(Math.random() * board.length);
+      let selectedIndex = Math.floor(Math.random() * numTiles);
       while (selected.includes(selectedIndex)) {
-        selectedIndex = Math.floor(Math.random() * board.length);
+        selectedIndex = Math.floor(Math.random() * numTiles);
       }
       selected.push(selectedIndex);
     }
@@ -38,8 +45,11 @@ function App() {
       newBoard[index] = !newBoard[index];
       return newBoard;
     });
-    generateLevel();
   }
+
+  useEffect(() => {
+    generateLevel();
+  }, []);
 
   return gameStarted ? (
     <Gameboard board={board} handleClick={handleClick} />
