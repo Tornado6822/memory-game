@@ -6,6 +6,10 @@
   color: var(--text);
 }
 
+h1 {
+  font-family: "Press Start 2P", system-ui;
+}
+
 .setup-screen .btn-start {
   background-color: var(--primary);
 }

@@ -12,4 +12,5 @@ body {
   min-height: 100vh;
   background: linear-gradient(var(--bg-primary), var(--bg-secondary));
   color: var(--text);
+  font-family: "Nunito", sans-serif;
 }

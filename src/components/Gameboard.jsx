@@ -48,7 +48,9 @@ function Gameboard({
     <div className="container my-container mt-5 p-5 d-flex flex-column justify-content-center align-items-center">
       <div className="my-3 d-flex gap-5">
         <h1>Level {level}</h1>
-        <h1>Time: {(time / 1000).toFixed(2)}</h1>
+        <h1>
+          Time: <b>{(time / 1000).toFixed(2)}</b>
+        </h1>
       </div>
 
       <Grid
@@ -90,7 +92,9 @@ function Gameboard({
         ""
       )}
 
-      <h1 className="my-3">Score: {score}</h1>
+      <h1 className="my-3">
+        Score: <b>{score}</b>
+      </h1>
     </div>
   );
 }

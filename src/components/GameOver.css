@@ -9,3 +9,7 @@
   background-color: var(--primary);
   color: black;
 }
+
+b {
+  color: var(--misc-2);
+}

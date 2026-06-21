@@ -112,7 +112,11 @@ function App() {
 
   function startRound() {
     setTime(2000);
-    setBlitzTime(3000);
+    if (level > 6) {
+      setBlitzTime(5000);
+    } else {
+      setBlitzTime(3000);
+    }
     setMistakes(0);
     setCorrectTiles(0);
 
@@ -193,7 +197,7 @@ function App() {
           return prev + (level + 1) * 1000;
       }
     });
-    if (level < 10) {
+    if (level < 9) {
       setLevel((prev) => prev + 1);
     } else {
       endGame();

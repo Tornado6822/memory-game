@@ -81,7 +81,7 @@ function SetupScreen({
           </div>
         </div>
 
-        <p>Can you beat level 10?</p>
+        <p>Can you beat level 9?</p>
         <div className="d-flex justify-content-center">
           <button
             onClick={() => {
