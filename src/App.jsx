@@ -5,13 +5,15 @@ import Gameboard from "./components/Gameboard";
 import SetupScreen from "./components/SetupScreen";
 
 function App() {
-  const [gridSize, setGridSize] = useState(0);
-
   const [gameStarted, setGameStarted] = useState(false);
   const [difficulty, setDifficulty] = useState("easy");
 
   const [board, setBoard] = useState(Array(25).fill(false));
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useState(0);
+  const [pattern, setPattern] = useState();
+
+  const [showPattern, setShowPattern] = useState(false);
+  const [inputEnabled, setInputEnabled] = useState(false);
 
   function generateLevel() {
     const numToSelect = level * 3 + 5;
@@ -37,22 +39,40 @@ function App() {
       });
       return newBoard;
     });
+
+    setPattern(selected);
   }
 
   function handleClick(index) {
+    /*
     setBoard((prev) => {
       const newBoard = [...prev];
       newBoard[index] = !newBoard[index];
       return newBoard;
     });
+    */
+    setLevel(level + 1);
   }
 
   useEffect(() => {
-    generateLevel();
+    startRound();
   }, []);
 
+  useEffect(() => {
+    startRound();
+  }, [level]);
+
+  function startRound() {
+    setInputEnabled(false);
+
+    setTimeout(() => {
+      setShowPattern(true);
+      generateLevel();
+    }, 1000);
+  }
+
   return gameStarted ? (
-    <Gameboard board={board} handleClick={handleClick} />
+    <Gameboard board={board} handleClick={handleClick} level={level} />
   ) : (
     <SetupScreen
       setGameStarted={setGameStarted}
