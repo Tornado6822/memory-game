@@ -2,18 +2,14 @@ import { useState, useEffect } from "react";
 import Grid from "./Grid";
 import "./Gameboard.css";
 
-function Gameboard({ board, handleClick, level, showPattern }) {
-  const [time, setTime] = useState(0);
-
+function Gameboard({ board, handleClick, level, showPattern, time, setTime }) {
   useEffect(() => {
     if (!showPattern) {
       return;
     }
 
-    const start = Date.now();
-
     const interval = setInterval(() => {
-      setTime((prev) => Date.now() - start);
+      setTime((prev) => prev - 10);
     }, 10);
 
     return () => clearInterval(interval);

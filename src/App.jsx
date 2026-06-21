@@ -10,6 +10,7 @@ function App() {
   const [board, setBoard] = useState(Array(25).fill(0));
   const [level, setLevel] = useState(0);
   const [pattern, setPattern] = useState();
+  const [time, setTime] = useState(2000);
 
   const [showPattern, setShowPattern] = useState(false);
   const [inputEnabled, setInputEnabled] = useState(false);
@@ -21,6 +22,10 @@ function App() {
     const numToSelect = level * 2 + 4;
     const sideLength = Math.ceil(Math.sqrt(numToSelect * 2));
     const numTiles = sideLength ** 2;
+
+    console.log(
+      `Generating matrix with sidelength ${sideLength} and numTiles ${numTiles} for level ${level}`,
+    );
 
     setBoard(Array(numTiles).fill(0));
   }
@@ -75,6 +80,10 @@ function App() {
   }
 
   function startRound() {
+    setTime(2000);
+    setMistakes(0);
+    setCorrectTiles(0);
+
     setInputEnabled(false);
     generateMatrix();
 
@@ -86,7 +95,7 @@ function App() {
         generateMatrix();
         setShowPattern(false);
         setInputEnabled(true);
-      }, 3000);
+      }, 2000);
     }, 600);
   }
 
@@ -104,16 +113,33 @@ function App() {
     }
 
     if (correctTiles == pattern.length) {
-      winGame();
+      setTimeout(() => {
+        winGame();
+      }, [250]);
     }
   }, [correctTiles]);
 
+  //Track level
+  useEffect(() => {
+    if (!inputEnabled) {
+      return;
+    }
+    startRound();
+  }, [level]);
+
   function endGame() {
+    setInputEnabled(false);
     console.log("You lose!");
   }
 
   function winGame() {
     console.log("You win!");
+
+    if (level < 10) {
+      setLevel((prev) => prev + 1);
+    } else {
+      console.log("No more levels. You've won the game!");
+    }
   }
 
   return gameStarted ? (
@@ -122,6 +148,8 @@ function App() {
       handleClick={handleClick}
       level={level}
       showPattern={showPattern}
+      time={time}
+      setTime={setTime}
     />
   ) : (
     <SetupScreen
