@@ -171,6 +171,18 @@ function App() {
   }
 
   function winGame() {
+    setScore((prev) => {
+      switch (difficulty) {
+        case "hard":
+          return prev + (level + 1) * 1000 * 2;
+
+        case "medium":
+          return prev + (level + 1) * 1000 * 1.5;
+
+        default:
+          return prev + (level + 1) * 1000;
+      }
+    });
     if (level < 10) {
       setLevel((prev) => prev + 1);
     } else {
@@ -191,6 +203,7 @@ function App() {
       symbolsEnabled={symbolsEnabled}
       mistakes={mistakes}
       difficulty={difficulty}
+      score={score}
     />
   ) : (
     <SetupScreen

@@ -13,6 +13,7 @@ function Gameboard({
   symbolsEnabled,
   mistakes,
   difficulty,
+  score,
 }) {
   useEffect(() => {
     if (!showPattern) {
@@ -60,6 +61,8 @@ function Gameboard({
           />
         </div>
       )}
+
+      <h1 className="my-3">Score: {score}</h1>
     </div>
   );
 }
