@@ -14,6 +14,9 @@ function App() {
   const [showPattern, setShowPattern] = useState(false);
   const [inputEnabled, setInputEnabled] = useState(false);
 
+  const [mistakes, setMistakes] = useState(0);
+  const [correctTiles, setCorrectTiles] = useState(0);
+
   function generateMatrix() {
     const numToSelect = level * 2 + 4;
     const sideLength = Math.ceil(Math.sqrt(numToSelect * 2));
@@ -38,8 +41,6 @@ function App() {
       selected.push(selectedIndex);
     }
 
-    console.log(selected);
-
     setBoard((prev) => {
       const newBoard = [...prev];
       selected.forEach((index) => {
@@ -54,12 +55,16 @@ function App() {
   function handleClick(index) {
     if (inputEnabled) {
       if (pattern.includes(index)) {
+        setCorrectTiles((prev) => prev + 1);
+
         setBoard((prev) => {
           const newBoard = [...prev];
           newBoard[index] = 1;
           return newBoard;
         });
       } else {
+        setMistakes((prev) => prev + 1);
+
         setBoard((prev) => {
           const newBoard = [...prev];
           newBoard[index] = 2;
@@ -68,12 +73,6 @@ function App() {
       }
     }
   }
-
-  /*
-  useEffect(() => {
-    startRound();
-  }, [gameStarted]);
-*/
 
   function startRound() {
     setInputEnabled(false);
@@ -88,7 +87,33 @@ function App() {
         setShowPattern(false);
         setInputEnabled(true);
       }, 3000);
-    }, 1500);
+    }, 600);
+  }
+
+  //Track Mistakes
+  useEffect(() => {
+    if (mistakes > 2) {
+      endGame();
+    }
+  }, [mistakes]);
+
+  //Track Correct
+  useEffect(() => {
+    if (!gameStarted) {
+      return;
+    }
+
+    if (correctTiles == pattern.length) {
+      winGame();
+    }
+  }, [correctTiles]);
+
+  function endGame() {
+    console.log("You lose!");
+  }
+
+  function winGame() {
+    console.log("You win!");
   }
 
   return gameStarted ? (

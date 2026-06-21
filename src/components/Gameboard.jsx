@@ -5,20 +5,19 @@ import "./Gameboard.css";
 function Gameboard({ board, handleClick, level, showPattern }) {
   const [time, setTime] = useState(0);
 
-  (useEffect(() => {
-    console.log("Firing!");
-
+  useEffect(() => {
     if (!showPattern) {
       return;
     }
 
+    const start = Date.now();
+
     const interval = setInterval(() => {
-      setTime((prev) => prev + 10);
+      setTime((prev) => Date.now() - start);
     }, 10);
 
     return () => clearInterval(interval);
-  }),
-    [showPattern]);
+  }, [showPattern]);
 
   return (
     <div className="container my-container mt-5 p-5 d-flex flex-column justify-content-center align-items-center">
