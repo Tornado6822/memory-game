@@ -22,6 +22,8 @@ function App() {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
+  const [blitzTime, setBlitzTime] = useState(3000);
+
   function generateMatrix() {
     let numTiles;
     if (level < 2) {
@@ -110,6 +112,7 @@ function App() {
 
   function startRound() {
     setTime(2000);
+    setBlitzTime(3000);
     setMistakes(0);
     setCorrectTiles(0);
 
@@ -155,6 +158,13 @@ function App() {
     }
     startRound();
   }, [level]);
+
+  //track blitz timer
+  useEffect(() => {
+    if (difficulty === "hard" && blitzTime <= 0) {
+      endGame();
+    }
+  }, [blitzTime]);
 
   function endGame() {
     setInputEnabled(false);
@@ -204,6 +214,9 @@ function App() {
       mistakes={mistakes}
       difficulty={difficulty}
       score={score}
+      blitzTime={blitzTime}
+      setBlitzTime={setBlitzTime}
+      inputEnabled={inputEnabled}
     />
   ) : (
     <SetupScreen

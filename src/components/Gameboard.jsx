@@ -14,7 +14,11 @@ function Gameboard({
   mistakes,
   difficulty,
   score,
+  blitzTime,
+  setBlitzTime,
+  inputEnabled,
 }) {
+  //showPattern clock
   useEffect(() => {
     if (!showPattern) {
       return;
@@ -26,6 +30,19 @@ function Gameboard({
 
     return () => clearInterval(interval);
   }, [showPattern]);
+
+  //blitz timer
+  useEffect(() => {
+    if (!inputEnabled) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setBlitzTime((prev) => prev - 10);
+    }, 10);
+
+    return () => clearInterval(interval);
+  }, [inputEnabled]);
 
   return (
     <div className="container my-container mt-5 p-5 d-flex flex-column justify-content-center align-items-center">
@@ -60,6 +77,17 @@ function Gameboard({
             }}
           />
         </div>
+      )}
+
+      {difficulty === "hard" ? (
+        <div className="blitz-timer my-5">
+          <div
+            className="blitz-timer-bar"
+            style={{ width: `${(blitzTime / 3000) * 100}%` }}
+          ></div>
+        </div>
+      ) : (
+        ""
       )}
 
       <h1 className="my-3">Score: {score}</h1>
