@@ -7,7 +7,7 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [difficulty, setDifficulty] = useState("easy");
 
-  const [board, setBoard] = useState(Array(25).fill(0));
+  const [board, setBoard] = useState(Array(9).fill(0));
   const [level, setLevel] = useState(0);
   const [pattern, setPattern] = useState();
   const [time, setTime] = useState(2000);
@@ -19,21 +19,47 @@ function App() {
   const [correctTiles, setCorrectTiles] = useState(0);
 
   function generateMatrix() {
-    const numToSelect = level * 2 + 4;
-    const sideLength = Math.ceil(Math.sqrt(numToSelect * 2));
-    const numTiles = sideLength ** 2;
-
-    console.log(
-      `Generating matrix with sidelength ${sideLength} and numTiles ${numTiles} for level ${level}`,
-    );
+    let numTiles;
+    if (level < 2) {
+      numTiles = 9;
+    } else if (level < 5) {
+      numTiles = 16;
+    } else if (level < 10) {
+      numTiles = 25;
+    } else {
+      numTiles = 36;
+    }
 
     setBoard(Array(numTiles).fill(0));
   }
 
   function generateLevel() {
-    const numToSelect = level * 2 + 4;
-    const sideLength = Math.ceil(Math.sqrt(numToSelect * 2));
-    const numTiles = sideLength ** 2;
+    let numTiles;
+    if (level < 2) {
+      numTiles = 9;
+    } else if (level < 5) {
+      numTiles = 16;
+    } else if (level < 10) {
+      numTiles = 25;
+    } else {
+      numTiles = 36;
+    }
+
+    let numToSelect;
+    switch (numTiles) {
+      case 9:
+        numToSelect = level * 2 + 2;
+        break;
+      case 16:
+        numToSelect = level * 3 - level;
+        break;
+      case 25:
+        numToSelect = (level - 5) * 2 + 5;
+        break;
+      default:
+        numToSelect = 15;
+    }
+    console.log(numToSelect, numTiles);
 
     setBoard(Array(numTiles).fill(0));
 
@@ -92,8 +118,8 @@ function App() {
       generateLevel();
 
       setTimeout(() => {
-        generateMatrix();
         setShowPattern(false);
+        generateMatrix();
         setInputEnabled(true);
       }, 2000);
     }, 600);
