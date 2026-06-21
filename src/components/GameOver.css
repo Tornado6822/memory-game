@@ -1,0 +1,11 @@
+.my-container .btn-restart {
+  background-color: var(--primary);
+  width: 200px;
+  height: auto;
+  font-size: 20px;
+}
+
+.my-container .btn-restart:hover {
+  background-color: var(--primary);
+  color: black;
+}

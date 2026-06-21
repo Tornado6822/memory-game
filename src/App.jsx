@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useSyncExternalStore } from "react";
 import "./App.css";
 import Gameboard from "./components/Gameboard";
 import SetupScreen from "./components/SetupScreen";
+import GameOver from "./components/GameOver";
 
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
@@ -10,14 +11,16 @@ function App() {
 
   const [board, setBoard] = useState(Array(9).fill(0));
   const [level, setLevel] = useState(0);
-  const [pattern, setPattern] = useState();
   const [time, setTime] = useState(2000);
+  const [pattern, setPattern] = useState();
 
   const [showPattern, setShowPattern] = useState(false);
   const [inputEnabled, setInputEnabled] = useState(false);
 
   const [mistakes, setMistakes] = useState(0);
   const [correctTiles, setCorrectTiles] = useState(0);
+  const [score, setScore] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
 
   function generateMatrix() {
     let numTiles;
@@ -60,7 +63,6 @@ function App() {
       default:
         numToSelect = 15;
     }
-    console.log(numToSelect, numTiles);
 
     setBoard(Array(numTiles).fill(0));
 
@@ -128,7 +130,7 @@ function App() {
 
   //Track Mistakes
   useEffect(() => {
-    if (mistakes > 2) {
+    if (mistakes > 2 && (difficulty === "medium" || difficulty === "hard")) {
       endGame();
     }
   }, [mistakes]);
@@ -156,20 +158,29 @@ function App() {
 
   function endGame() {
     setInputEnabled(false);
-    console.log("You lose!");
+    setGameOver(true);
+  }
+
+  function resetGame() {
+    setGameStarted(false);
+    setDifficulty("easy");
+    setSymbolsEnabled(false);
+    setLevel(0);
+    setGameOver(false);
+    setScore(0);
   }
 
   function winGame() {
-    console.log("You win!");
-
     if (level < 10) {
       setLevel((prev) => prev + 1);
     } else {
-      console.log("No more levels. You've won the game!");
+      endGame();
     }
   }
 
-  return gameStarted ? (
+  return gameOver ? (
+    <GameOver level={level} score={score} resetGame={resetGame} />
+  ) : gameStarted ? (
     <Gameboard
       board={board}
       handleClick={handleClick}
@@ -178,6 +189,8 @@ function App() {
       time={time}
       setTime={setTime}
       symbolsEnabled={symbolsEnabled}
+      mistakes={mistakes}
+      difficulty={difficulty}
     />
   ) : (
     <SetupScreen

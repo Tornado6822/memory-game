@@ -1,4 +1,5 @@
 import "./SetupScreen.css";
+import { HiLightningBolt, HiHeart, HiStar } from "react-icons/hi";
 
 function SetupScreen({
   setGameStarted,
@@ -13,7 +14,7 @@ function SetupScreen({
         <h1>Welcome to Memory Matrix!</h1>
         <h4>Memorize the tiles. Recreate the pattern.</h4>
 
-        <div>
+        <div className="mt-3">
           <div className="btn-group">
             <button
               className={`btn btn-difficulty ${difficulty === "easy" ? "btn-selected" : ""}`}
@@ -42,14 +43,24 @@ function SetupScreen({
             <ul>
               {difficulty === "hard" ? (
                 <>
-                  <li>Blitz Timer</li>
-                  <li>Limited Lives</li>
-                  <li>Score 2x</li>
+                  <li>
+                    Blitz Timer <HiLightningBolt id="lightning" />
+                  </li>
+                  <li>
+                    Limited Lives <HiHeart id="heart" />
+                  </li>
+                  <li>
+                    Score <b>2x</b> <HiStar id="star" />
+                  </li>
                 </>
               ) : difficulty === "medium" ? (
                 <>
-                  <li>Limited Lives icon</li>
-                  <li>Score 1.5x</li>
+                  <li>
+                    Limited Lives <HiHeart id="heart" />
+                  </li>
+                  <li>
+                    Score <b>1.5x</b> <HiStar id="star" />
+                  </li>
                 </>
               ) : (
                 <>

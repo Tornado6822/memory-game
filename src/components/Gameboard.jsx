@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Grid from "./Grid";
 import "./Gameboard.css";
+import { HiHeart } from "react-icons/hi";
 
 function Gameboard({
   board,
@@ -10,6 +11,8 @@ function Gameboard({
   time,
   setTime,
   symbolsEnabled,
+  mistakes,
+  difficulty,
 }) {
   useEffect(() => {
     if (!showPattern) {
@@ -35,6 +38,28 @@ function Gameboard({
         handleClick={handleClick}
         symbolsEnabled={symbolsEnabled}
       />
+      {difficulty === "easy" ? null : (
+        <div className="d-flex justify-content-center gap-2 mt-5">
+          <HiHeart
+            id="life"
+            style={{
+              color: `${mistakes <= 2 ? "var(--misc-2)" : "var(--bg-secondary)"}`,
+            }}
+          />
+          <HiHeart
+            id="life"
+            style={{
+              color: `${mistakes <= 1 ? "var(--misc-2)" : "var(--bg-secondary)"}`,
+            }}
+          />
+          <HiHeart
+            id="life"
+            style={{
+              color: `${mistakes <= 0 ? "var(--misc-2)" : "var(--bg-secondary)"}`,
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }
