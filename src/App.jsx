@@ -9,11 +9,19 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [difficulty, setDifficulty] = useState("easy");
 
-  const [board, setBoard] = useState(Array(16).fill(false));
+  const [board, setBoard] = useState(Array(25).fill(false));
   const [level, setLevel] = useState(0);
 
+  function handleClick(index) {
+    setBoard((prev) => {
+      const newBoard = [...prev];
+      newBoard[index] = !newBoard[index];
+      return newBoard;
+    });
+  }
+
   return gameStarted ? (
-    <Gameboard board={board} />
+    <Gameboard board={board} handleClick={handleClick} />
   ) : (
     <SetupScreen
       setGameStarted={setGameStarted}
