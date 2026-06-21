@@ -11,7 +11,7 @@ function Grid({ board, handleClick }) {
           className="tile"
           onClick={() => handleClick(index)}
           style={{
-            backgroundColor: `${tile ? "var(--primary)" : "var(--misc-1)"}`,
+            backgroundColor: `${tile === 1 ? "var(--primary)" : tile === 0 ? "var(--misc-1)" : "var(--bg-secondary)"}`,
           }}
         >
           {/*}{tile ? "✓" : ""}{*/}
