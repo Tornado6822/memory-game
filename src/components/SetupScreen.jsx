@@ -10,7 +10,7 @@ function SetupScreen({
 }) {
   return (
     <div className="setup-screen">
-      <div className="container my-container d-flex flex-column align-items-center py-5 my-5 gap-2">
+      <div className="container my-container d-flex flex-column align-items-center py-5 my-5 gap-4">
         <h1>Welcome to Memory Matrix!</h1>
         <h4>Memorize the tiles. Recreate the pattern.</h4>
 
@@ -37,7 +37,7 @@ function SetupScreen({
           </div>
         </div>
 
-        <div className="d-flex flex-column justify-content-center my-3">
+        <div className="d-flex flex-column justify-content-center mt-3">
           <h6>Modifiers</h6>
           <div className="d-flex justify-content-center">
             <ul>
@@ -69,11 +69,12 @@ function SetupScreen({
               )}
             </ul>
           </div>
-          <div className="form-check">
+
+          <div className="form-check my-3">
             <input
               className="form-check-input"
               type="checkbox"
-              onClick={() => setSymbolsEnabled((prev) => !prev)}
+              onChange={() => setSymbolsEnabled((prev) => !prev)}
               id="symbolsCheck"
             />
             <label className="form-check-label" htmlFor="symbolsCheck"></label>
@@ -81,7 +82,10 @@ function SetupScreen({
           </div>
         </div>
 
-        <p>Can you beat level 9?</p>
+        <p className="challenge-text">
+          🏆 Can you beat <strong>Level 9</strong>?
+        </p>
+
         <div className="d-flex justify-content-center">
           <button
             onClick={() => {

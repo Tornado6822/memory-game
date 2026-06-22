@@ -47,7 +47,9 @@ function Gameboard({
   return (
     <div className="container my-container mt-5 p-5 d-flex flex-column justify-content-center align-items-center">
       <div className="my-3 d-flex gap-5">
-        <h1>Level {level}</h1>
+        <h1>
+          Level <b>{level}</b>
+        </h1>
         <h1>
           Time: <b>{(time / 1000).toFixed(2)}</b>
         </h1>
@@ -85,7 +87,9 @@ function Gameboard({
         <div className="blitz-timer my-5">
           <div
             className="blitz-timer-bar"
-            style={{ width: `${(blitzTime / 3000) * 100}%` }}
+            style={{
+              width: `${level > 6 ? (blitzTime / 5000) * 100 : (blitzTime / 3000) * 100}%`,
+            }}
           ></div>
         </div>
       ) : (

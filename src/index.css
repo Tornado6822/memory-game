@@ -14,3 +14,7 @@ body {
   color: var(--text);
   font-family: "Nunito", sans-serif;
 }
+
+h1 {
+  font-family: "Press Start 2P", system-ui;
+}
